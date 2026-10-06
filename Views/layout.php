@@ -39,6 +39,12 @@
         <a href="<?= site_url('customers') ?>">Customers</a>
         <a href="<?= site_url('users') ?>">Users</a>
         <a href="<?= site_url('about') ?>">About</a>
+        <?php if (session()->get('isLoggedIn')): ?>
+            <span style="color:#fff; margin-left:1rem;">Logged in as <?= esc(session()->get('username')) ?></span>
+            <a href="<?= site_url('logout') ?>">Logout</a>
+        <?php else: ?>
+            <a href="<?= site_url('login') ?>">Login</a>
+        <?php endif ?>
     </nav>
     <main>
         <?= $this->renderSection('content') ?>

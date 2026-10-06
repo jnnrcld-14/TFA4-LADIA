@@ -23,6 +23,10 @@
         <label for="email">Email</label>
         <input id="email" type="email" name="email" value="<?= esc(old('email', $user['email'])) ?>">
 
+        <label for="password">New Password</label>
+        <input id="password" type="password" name="password" minlength="8">
+        <small>Leave blank to keep the current password. Minimum 8 characters when changing it.</small>
+
         <label for="avatar">Profile Picture</label>
         <input id="avatar" type="file" name="avatar" accept=".jpg,.jpeg,.png">
         <small>JPG or PNG only; maximum 2MB. The uploaded image is prepared as a 150 × 150 thumbnail.</small>

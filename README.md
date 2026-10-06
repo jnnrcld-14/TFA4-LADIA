@@ -65,3 +65,26 @@ Make sure the PHP image extension required by your configured CodeIgniter image 
 ## Important
 
 `php spark migrate:fresh --seed` resets the database and is useful for a clean demonstration, but it deletes existing database data. Use it only when a reset is intended.
+
+
+## Authentication added for TFA3
+
+- Login: `/login`
+- Logout: `/logout`
+- Customer Accounts and User Accounts are protected by the `auth` filter.
+- Existing users receive the temporary password `password` when the authentication migration runs. Change it after logging in.
+- New users must have a password of at least 8 characters.
+- Editing a user leaves the existing password unchanged when the password field is blank.
+- Passwords are stored using `password_hash()` and checked using `password_verify()`.
+
+### Test checklist
+
+1. Log out and visit `/customers` -> redirected to `/login`.
+2. Log out and visit `/customers/new` -> redirected to `/login`.
+3. Log out and visit `/customers/edit/1` -> redirected to `/login` (if record 1 exists).
+4. Log out and visit `/users` -> redirected to `/login`.
+5. Log out and visit `/users/new` -> redirected to `/login`.
+6. Log out and visit `/users/edit/1` -> redirected to `/login` (if record 1 exists).
+7. Log in as `demo_user` with the temporary password `password`.
+8. Visit `/customers` and `/users` -> pages should load normally.
+9. Visit `/logout`, then confirm protected pages redirect to `/login` again.

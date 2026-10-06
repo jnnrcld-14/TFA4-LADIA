@@ -24,6 +24,7 @@ class DemoDataSeeder extends Seeder
 
         $this->db->table('users')->insert([
             'username' => 'demo_user',
+            'password' => password_hash('password', PASSWORD_DEFAULT),
             'full_name' => 'Demo User',
             'email' => 'demo.user@example.com',
             'avatar' => null,

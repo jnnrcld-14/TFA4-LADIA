@@ -32,6 +32,7 @@ class Users extends BaseController
         $rules = [
             'username'  => 'required|is_unique[users.username]',
             'full_name' => 'required',
+            'password'  => 'required|min_length[8]',
         ];
 
         if (!$this->validate($rules)) {
@@ -44,6 +45,7 @@ class Users extends BaseController
             'username'  => trim($this->request->getPost('username')),
             'full_name' => trim($this->request->getPost('full_name')),
             'email'     => trim($this->request->getPost('email')),
+            'password'  => password_hash((string) $this->request->getPost('password'), PASSWORD_DEFAULT),
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
@@ -73,6 +75,7 @@ class Users extends BaseController
         $rules = [
             'username'  => "required|is_unique[users.username,id,{$id}]",
             'full_name' => 'required',
+            'password'  => 'permit_empty|min_length[8]',
         ];
 
         if (!$this->validate($rules)) {
@@ -86,6 +89,11 @@ class Users extends BaseController
             'full_name' => trim($this->request->getPost('full_name')),
             'email'     => trim($this->request->getPost('email')),
         ];
+
+        $newPassword = (string) $this->request->getPost('password');
+        if ($newPassword !== '') {
+            $data['password'] = password_hash($newPassword, PASSWORD_DEFAULT);
+        }
 
         $avatar = $this->request->getFile('avatar');
 

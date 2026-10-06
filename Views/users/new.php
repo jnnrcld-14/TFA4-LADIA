@@ -23,6 +23,10 @@
         <label for="email">Email</label>
         <input id="email" type="email" name="email" value="<?= esc(old('email')) ?>">
 
+        <label for="password">Password <span class="required">*</span></label>
+        <input id="password" type="password" name="password" minlength="8" required>
+        <small>Minimum 8 characters. The password is stored as a secure hash.</small>
+
         <button class="button" type="submit">Create User</button>
         <a class="button secondary" href="<?= site_url('users') ?>">Cancel</a>
     </form>
