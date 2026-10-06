@@ -1,4 +1,4 @@
-# TFA2 POS / Account Management Extension
+# POS / Account Management Extension
 
 This submission extends the supplied CodeIgniter 4 TFA2 project with customer and user account management and prepared user avatars.
 
